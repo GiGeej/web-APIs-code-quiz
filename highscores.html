@@ -3,19 +3,21 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>High Scores</title>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Highscores</title>
+
+    <link rel="stylesheet" href="./assets/css/styles.css" />
   </head>
+
   <body>
-    <h1>High Scores</h1>
+    <div class="wrapper">
+      <h1>Highscores</h1>
+      <ol id="highscores"></ol>
 
-    <!-- Input field for high score entry -->
-    <label for="score">Enter High Score:</label>
-    <input type="text" id="score" placeholder="high score" />
+      <a href="index.html"><button>Go Back</button></a>
+      <button id="clear">Clear Highscores</button>
+    </div>
 
-    <!-- Buttons for "Go Back" and "Clear High Score" -->
-    <button id="go-back">Go Back</button>
-    <button id="clear-high-score">Clear High Score</button>
-
-    <script src="script.js"></script>
+    <script src="./assets/js/scores.js"></script>
   </body>
 </html>

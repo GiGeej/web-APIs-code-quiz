@@ -1,70 +1,88 @@
 body {
-  font-family: Arial, sans-serif;
-  margin: 0;
-  padding: 0;
-  background-color: #f0f0f0;
+  font-family: Arial;
+  font-size: 120%;
 }
 
-.quiz-container {
-  max-width: 800px;
-  margin: 0 auto;
-  text-align: center;
-  background-color: white;
-  padding: 20px;
-  border-radius: 8px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+a {
+  color: #563d7c;
+  text-decoration: none;
+  transition: color 0.1s;
+}
+
+a:hover {
+  color: #8570a5;
+}
+
+button {
+  display: inline-block;
+  margin: 5px;
+  cursor: pointer;
+  font-size: 100%;
+  background-color: #563d7c;
+  border-radius: 5px;
+  padding: 2px 10px;
+  color: white;
+  border: 0;
+  transition: background-color 0.1s;
+}
+
+button:hover {
+  background-color: #8570a5;
+}
+
+.choices button {
+  display: block;
+}
+
+input[type="text"] {
+  font-size: 100%;
+}
+
+ol {
+  padding-left: 0px;
+  max-height: 400px;
+  overflow: auto;
+}
+
+li {
+  padding: 5px;
+  list-style: decimal inside none;
+}
+
+li:nth-child(odd) {
+  background-color: #f3edfc;
+}
+
+.wrapper {
+  margin: 100px auto 0 auto;
+  max-width: 600px;
 }
 
 .hide {
   display: none;
 }
 
-h1 {
-  font-size: 36px;
+.start {
+  text-align: center;
 }
 
-.btn-container {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
+.scores {
+  position: absolute;
+  top: 10px;
+  left: 10px;
 }
 
-button {
-  padding: 10px 20px;
-  font-size: 18px;
-  cursor: pointer;
-}
-
-#answer-buttons button {
-  background-color: #007bff;
-  color: white;
-  border: none;
-}
-
-#answer-buttons button:hover {
-  background-color: #0056b3;
-}
-
-#timer {
-  font-size: 24px;
+.feedback {
+  font-style: italic;
+  font-size: 120%;
   margin-top: 20px;
+  padding-top: 10px;
+  color: gray;
+  border-top: 2px solid #ccc;
 }
 
-#game-over {
-  margin-top: 20px;
-}
-
-#initials {
-  padding: 5px;
-  font-size: 16px;
-}
-
-#save-score-button {
-  background-color: #28a745;
-  color: white;
-  border: none;
-}
-
-#save-score-button:hover {
-  background-color: #1e7e34;
+.timer {
+  position: absolute;
+  top: 10px;
+  right: 10px;
 }
