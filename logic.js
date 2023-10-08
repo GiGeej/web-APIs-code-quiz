@@ -6,14 +6,16 @@ var timerId;
 // variables to reference DOM elements
 
 //START BUTTON
-var startBtn = document.querySelector("#start");
-startBtn = addEventListener("click", startQuiz);
+var startBtn = document.getElementById("start");
+startBtn.addEventListener("click", startQuiz);
 
 //STRAT SCREEN
 var startScreen = document.getElementById("start-screen");
 
 //QUESTIONS SCREEN
 var questScreen = document.getElementById("questions");
+var questTitle = document.getElementById("question-title");
+var questChoices = document.getElementById("choices");
 
 function startQuiz() {
   //test
@@ -48,12 +50,27 @@ function startTimer() {
 }
 
 function getQuestion() {
-  // get current question object from array
-  // update title with current question
-  // clear out any old question choices
-  // loop over choices
-  // create new button for each choice
-  // display on the page
+  //   // get current question object from array
+  //   var currentQuest = questions[0];
+  //   console.log(currentQuest);
+  //   // update title with current question
+  //   questTitle.textContent = currentQuest.title;
+  //   // clear out any old question choices
+  //   questChoices.innerHTML = "";
+  //   // loop over choices
+  //   var currentChoices = questions[0].choices;
+  //   console.log(currentChoices);
+  //   for (
+  //     let i = 0;
+  //     i < questions[i].choices.length;
+  //     i++ // create new button for each choice
+  //   ) {
+  //     var choiceBtn = document.createElement("button");
+  //     // set the xt of teh byn to choice
+  //     choiceBtn.textContent = questions.choices[i];
+  //     // display on the page
+  //     questChoices.appendChild(choiceBtn);
+  //   }
 }
 
 function questionClick(event) {
