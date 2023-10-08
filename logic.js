@@ -22,6 +22,10 @@ choiceButtons.forEach(function (choiceBtn) {
   choiceBtn.addEventListener("click", questionClick);
 });
 
+//END SCREEN
+var endScreen = document.getElementById("end-screen");
+var finScore = document.getElementById("final-score");
+
 function startQuiz() {
   //test
   console.log("this seems to be working.. so far");
@@ -48,8 +52,8 @@ function startTimer() {
 
     // Check if time is up
     if (time <= 0) {
-      clearInterval(timerId); // Stop the timer when time is up
-      //  add code here to handle what happens when the time is up, such as ending the quiz?? = quizEnd()
+      clearInterval(timerId);
+      quizEnd();
     }
   }, 1000); // 1000 milliseconds = 1 second
 }
@@ -103,7 +107,7 @@ function questionClick(event) {
     //if incorrect penalize
   } else {
     currentQuestionIndex++;
-    time -= 10;
+    time -= 25;
   }
   // display new time on page
   document.getElementById("time").textContent = time;
@@ -122,31 +126,69 @@ function questionClick(event) {
 
 function quizEnd() {
   // stop timer
-  // show end screen
-  // show final score
+  clearInterval(timerId);
   // hide questions section
+  questScreen.setAttribute("class", "hide");
+  // show end screen
+  endScreen.setAttribute("class", "start");
+  // show final score
+  finScore.textContent = time;
 }
 
+//not sure what this is for??
 function clockTick() {
   // update time
+  //time--;
+  document.getElementById("time").textContent = time;
   // check if user ran out of time
+  if (time <= 0) {
+    quizEnd();
+  }
 }
+
+// Ensure that the <ol> element with id "highscores" exists in your HTML
+const highscoresList = document.getElementById("highscores");
 
 function saveHighscore() {
-  // get value of input box
-  // make sure value wasn't empty
-  // get saved scores from localstorage, or if not any, set to empty array
-  // format new score object for current user
-  // save to localstorage
-  // redirect to next page
+  // Get the value of the initials input field
+  const initialsInput = document.getElementById("initials").value.trim();
+
+  // Check if the input is not empty
+  if (!initialsInput) {
+    alert("Please enter your initials to save your high score.");
+    return;
+  }
+
+  // Retrieve existing high scores from local storage (if any)
+  let highscores = JSON.parse(localStorage.getItem("highscores")) || [];
+
+  // Format the new score object for the current user
+  const newScore = {
+    initials: initialsInput,
+    score: time, // Assuming "time" is the score you want to save
+  };
+
+  // Add the new score object to the array of high scores
+  highscores.push(newScore);
+
+  // Save the updated high scores back to local storage as a JSON string
+  localStorage.setItem("highscores", JSON.stringify(highscores));
+
+  // Redirect to the "highscores.html" page
+  window.location.href = "highscores.html";
 }
+
+// User clicks button to submit initials
+let sbmtBtn = document.getElementById("submit");
+sbmtBtn.addEventListener("click", function () {
+  console.log("Button clicked"); // Add this line
+  saveHighscore();
+});
 
 function checkForEnter(event) {
-  // "13" represents the enter key
+  // "13" represents the Enter key
+  if (event.keyCode === 13) {
+    // Trigger the saveHighscore function when Enter is pressed
+    saveHighscore();
+  }
 }
-
-// user clicks button to submit initials
-
-// user clicks button to start quiz
-
-// user clicks on element containing choices
