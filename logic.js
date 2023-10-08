@@ -5,16 +5,46 @@ var timerId;
 
 // variables to reference DOM elements
 
+//START BUTTON
+var startBtn = document.querySelector("#start");
+startBtn = addEventListener("click", startQuiz);
+
+//STRAT SCREEN
+var startScreen = document.getElementById("start-screen");
+
+//QUESTIONS SCREEN
+var questScreen = document.getElementById("questions");
+
 function startQuiz() {
+  //test
+  console.log("this seems to be working.. so far");
   // hide start screen
-
+  startScreen.setAttribute("class", "hide");
   // un-hide questions section
-
+  questScreen.setAttribute("class", "start"); // **** DBLCHECK THE ABOVE l8r
   // start timer
+  startTimer();
 
-  // show starting time
+  // show starting time???
 
   getQuestion();
+}
+
+function startTimer() {
+  // Set an interval to update the timer every second (1000 milliseconds)
+  timerId = setInterval(function () {
+    // Display the remaining time in the "time" span
+    document.getElementById("time").textContent = time;
+
+    // Decrease the time by 1 second
+    time--;
+
+    // Check if time is up
+    if (time <= 0) {
+      clearInterval(timerId); // Stop the timer when time is up
+      //  add code here to handle what happens when the time is up, such as ending the quiz?? = quizEnd()
+    }
+  }, 1000); // 1000 milliseconds = 1 second
 }
 
 function getQuestion() {
