@@ -16,6 +16,11 @@ var startScreen = document.getElementById("start-screen");
 var questScreen = document.getElementById("questions");
 var questTitle = document.getElementById("question-title");
 var questChoices = document.getElementById("choices");
+//buttons
+var choiceButtons = document.querySelectorAll(".choices");
+choiceButtons.forEach(function (choiceBtn) {
+  choiceBtn.addEventListener("click", questionClick);
+});
 
 function startQuiz() {
   //test
@@ -51,22 +56,22 @@ function startTimer() {
 
 function getQuestion() {
   // get current question object from array
-  var currentQuest = questions[0];
-  console.log(currentQuest);
+  var currentQuest = questions[currentQuestionIndex];
+  //console.log(currentQuest);
   // update title with current question
   questTitle.textContent = currentQuest.title;
   // clear out any old question choices
   questChoices.innerHTML = "";
   // loop over choices
-  var currentChoices = questions[0].choices;
-  console.log(currentChoices);
+  var currentChoices = questions[currentQuestionIndex].choices;
+  //console.log(currentChoices);
   for (
     let i = 0;
     i < currentQuest.choices.length;
     i++ // create new button for each choice
   ) {
+    // set the txt of the btn to choice
     var choiceBtn = document.createElement("button");
-    // set the xt of the btn to choice
     choiceBtn.textContent = currentQuest.choices[i];
     // display on the page
     questChoices.appendChild(choiceBtn);
@@ -74,16 +79,45 @@ function getQuestion() {
 }
 
 function questionClick(event) {
+  event.stopPropagation();
+  var clickedChoice = event.target;
+  console.log(clickedChoice);
+  //test
+
   // if the clicked element is not a choice button, do nothing.
-  // check if user guessed wrong
-  // penalize time
+  if (clickedChoice.tagName !== "BUTTON") {
+    return;
+  }
+
+  // Get the current question object based on the currentQuestionIndex
+  var currentQuestion = questions[currentQuestionIndex];
+
+  // Get the user's choice from the clicked button's text content
+  var userChoice = clickedChoice.textContent;
+
+  // Check if the user's choice is correct
+  if (userChoice === currentQuestion.answer) {
+    //move to teh next question
+    currentQuestionIndex++;
+    //getQuestion();
+    //if incorrect penalize
+  } else {
+    currentQuestionIndex++;
+    time -= 10;
+  }
   // display new time on page
+  document.getElementById("time").textContent = time;
   // play "wrong" sound effect
   //else
   // play "right" sound effect
   // flash right/wrong feedback on page for half a second
   // move to next question
   // check if we've run out of questions
+  if (currentQuestionIndex >= questions.length) {
+    quizEnd();
+  } else {
+    getQuestion();
+  }
 }
 
 function quizEnd() {
