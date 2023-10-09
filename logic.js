@@ -194,5 +194,3 @@ function checkForEnter(event) {
     saveHighscore();
   }
 }
-
-//function that clears highscores

@@ -35,6 +35,19 @@
         listItem.textContent = `${score.initials}: ${score.score}`;
         highscoresList.appendChild(listItem);
       });
+
+      //function that clears highscores
+      var clearBtn = document.getElementById("clear");
+      clearBtn.addEventListener("click", clearHighs);
+
+      function clearHighs() {
+        // Remove all high scores from local storage
+        localStorage.removeItem("highscores");
+
+        // Clear the <ol> element by its id
+        let highscoresList = document.getElementById("highscores-list");
+        highscoresList.innerHTML = "";
+      }
     </script>
   </body>
 </html>
