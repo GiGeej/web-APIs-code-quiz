@@ -32,11 +32,9 @@ function startQuiz() {
   // hide start screen
   startScreen.setAttribute("class", "hide");
   // un-hide questions section
-  questScreen.setAttribute("class", "start"); // **** DBLCHECK THE ABOVE l8r
+  questScreen.setAttribute("class", "start"); //
   // start timer
   startTimer();
-
-  // show starting time???
 
   getQuestion();
 }
@@ -55,7 +53,7 @@ function startTimer() {
       clearInterval(timerId);
       quizEnd();
     }
-  }, 1000); // 1000 milliseconds = 1 second
+  }, 1000);
 }
 
 function getQuestion() {
@@ -85,7 +83,8 @@ function getQuestion() {
 function questionClick(event) {
   event.stopPropagation();
   var clickedChoice = event.target;
-  console.log(clickedChoice);
+  console.log(clickedChoice); //test
+  console.log(questions[currentQuestionIndex]); //test
   //test
 
   // if the clicked element is not a choice button, do nothing.
@@ -101,7 +100,7 @@ function questionClick(event) {
 
   // Check if the user's choice is correct
   if (userChoice === currentQuestion.answer) {
-    //move to teh next question
+    //move to the next question
     currentQuestionIndex++;
     //getQuestion();
     //if incorrect penalize
@@ -111,11 +110,10 @@ function questionClick(event) {
   }
   // display new time on page
   document.getElementById("time").textContent = time;
-  // play "wrong" sound effect
+  // TO DO = play "wrong" sound effect
   //else
-  // play "right" sound effect
-  // flash right/wrong feedback on page for half a second
-  // move to next question
+  // TO DO = play "right" sound effect
+  // TO DO = flash right/wrong feedback on page for half a second
   // check if we've run out of questions
   if (currentQuestionIndex >= questions.length) {
     quizEnd();
@@ -146,12 +144,12 @@ function clockTick() {
   }
 }
 
-// Ensure that the <ol> element with id "highscores" exists in your HTML
+// Ensure that the <ol> element with id "highscores" exists in HTML
 const highscoresList = document.getElementById("highscores");
 
 function saveHighscore() {
   // Get the value of the initials input field
-  const initialsInput = document.getElementById("initials").value.trim();
+  let initialsInput = document.getElementById("initials").value.trim();
 
   // Check if the input is not empty
   if (!initialsInput) {
@@ -161,11 +159,12 @@ function saveHighscore() {
 
   // Retrieve existing high scores from local storage (if any)
   let highscores = JSON.parse(localStorage.getItem("highscores")) || [];
+  console.log(highscores, "highscores"); //test;
 
   // Format the new score object for the current user
-  const newScore = {
+  let newScore = {
     initials: initialsInput,
-    score: time, // Assuming "time" is the score you want to save
+    score: time,
   };
 
   // Add the new score object to the array of high scores
@@ -173,6 +172,8 @@ function saveHighscore() {
 
   // Save the updated high scores back to local storage as a JSON string
   localStorage.setItem("highscores", JSON.stringify(highscores));
+  console.log(highscores, "highscores object"); //test
+  // // Iterate through the high scores and create <li> elements to display them
 
   // Redirect to the "highscores.html" page
   window.location.href = "highscores.html";
@@ -181,7 +182,8 @@ function saveHighscore() {
 // User clicks button to submit initials
 let sbmtBtn = document.getElementById("submit");
 sbmtBtn.addEventListener("click", function () {
-  console.log("Button clicked"); // Add this line
+  console.log("Button clicked"); // test
+
   saveHighscore();
 });
 
@@ -192,3 +194,5 @@ function checkForEnter(event) {
     saveHighscore();
   }
 }
+
+//function that clears highscores

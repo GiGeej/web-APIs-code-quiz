@@ -12,12 +12,29 @@
   <body>
     <div class="wrapper">
       <h1>Highscores</h1>
-      <ol id="highscores"></ol>
+      <ol id="highscores-list">
+        Highscores here
+      </ol>
 
       <a href="index.html"><button>Go Back</button></a>
       <button id="clear">Clear Highscores</button>
     </div>
+    <script src="./questions.js"></script>
+    <ol id="highscores-list"></ol>
 
-    <script src="./logic.js"></script>
+    <script>
+      // Retrieve high scores from local storage
+      let highscores = JSON.parse(localStorage.getItem("highscores")) || [];
+
+      // Get the <ol> element by its id
+      let highscoresList = document.getElementById("highscores-list");
+
+      // Iterate through the high scores and create <li> elements to display them
+      highscores.forEach((score) => {
+        let listItem = document.createElement("li");
+        listItem.textContent = `${score.initials}: ${score.score}`;
+        highscoresList.appendChild(listItem);
+      });
+    </script>
   </body>
 </html>
